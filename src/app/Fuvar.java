@@ -1,12 +1,13 @@
 package app;
 
 public class Fuvar {
+    //Minél nagyobb az ido, annál több az osszeg
     private String rendszam;
     private int idoMp;
-    private int osszeg;
+    private double osszeg; //Euro
     private String fizetesiMod;
 
-    public Fuvar(String rendszam, int idoMp, int osszeg, String fizetesiMod) {
+    public Fuvar(String rendszam, int idoMp, double osszeg, String fizetesiMod) {
         this.rendszam = rendszam;
         this.idoMp = idoMp;
         this.osszeg = osszeg;
@@ -21,7 +22,7 @@ public class Fuvar {
         return idoMp;
     }
 
-    public int getOsszeg() {
+    public double getOsszeg() {
         return osszeg;
     }
 
