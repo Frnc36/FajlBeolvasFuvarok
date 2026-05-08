@@ -9,6 +9,7 @@ import java.util.List;
 public class FajlBeolvas {
 
     static List<Fuvar> fuvarok = new ArrayList<>();
+    static final int TOHUF = 354; //2026.05.08
 
     public static void main(String[] args) throws IOException {
         Path path = Path.of("fuvarok.csv");
@@ -27,20 +28,27 @@ public class FajlBeolvas {
         }
         OsszesFuvarOsszeg();
         LegdragabbFuvarRendszama();
-        
-        System.out.println("3. Legolcs�bb fuvar forintba: ");
-        
-        int darab = 0;
-        for (int i = 0; i < fuvarok.size(); i++) {
-            if () {
-                
-            }
-            
-        }
-        System.out.println("4. H�ny k�rty�s fizet�s volt: ");
-        
+        LegolcsobbFuvarForintba(TOHUF);
+
+        /*
+        System.out.println("4. Hány kártyás fizetés volt: ");
+        System.out.println("5. Minden fizetési mód meghatározott: ");
+        System.out.println("6. Hány darab autó van a rendszerben: ");
+        System.out.println("7. Hányféle fizetési mód van: ");
+        System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
+        */
         
     }//main
+
+    private static void LegolcsobbFuvarForintba(int TOHUF) {
+        int akt = 0;
+        for (int i = 1; i < fuvarok.size(); i++) {
+            if (fuvarok.get(i).getOsszeg() < fuvarok.get(akt).getOsszeg()) {
+                akt = i;
+            }
+        }
+        System.out.println("3. Legolcsóbb fuvar forintba: "+ (int)fuvarok.get(akt).getOsszeg() * TOHUF+" FT");
+    }
 
     private static void LegdragabbFuvarRendszama() {
         int akt = 0;
@@ -49,7 +57,8 @@ public class FajlBeolvas {
                 akt = i;
             }
         }
-        System.out.println("2. Legdr�g�bb fuvar rendsz�ma: " + fuvarok.get(akt).getRendszam());
+        
+        System.out.println("2. Legdrágább fuvar rendszáma: " + fuvarok.get(akt).getRendszam());
     }
 
     private static void OsszesFuvarOsszeg() {
@@ -57,7 +66,7 @@ public class FajlBeolvas {
         for (int i = 0; i < fuvarok.size(); i++) {
             osszeg += fuvarok.get(i).getOsszeg();
         }
-        System.out.println("1. �sszed fuvar �rt�ke: " + osszeg);
+        System.out.println("1. Összed fuvar értéke: " + osszeg);
     }
 
 }//class
