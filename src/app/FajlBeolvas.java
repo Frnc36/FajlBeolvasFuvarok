@@ -29,6 +29,18 @@ public class FajlBeolvas {
         OsszesFuvarOsszeg();
         LegdragabbFuvarRendszama();
         LegolcsobbFuvarForintba(TOHUF);
+        HanyKartyasFizetesVolt();
+
+    }//main
+
+    private static void HanyKartyasFizetesVolt() {
+        int db = 0;
+        for (int i = 0; i < fuvarok.size(); i++) {
+            if (fuvarok.get(i).getFizetesiMod().equals("kártya")) {
+                db++;
+            }
+        }
+        System.out.println("4. Hány kártyás fizetés volt: " + db + " darab");
 
         /*
         System.out.println("4. Hány kártyás fizetés volt: ");
@@ -36,9 +48,8 @@ public class FajlBeolvas {
         System.out.println("6. Hány darab autó van a rendszerben: ");
         System.out.println("7. Hányféle fizetési mód van: ");
         System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
-        */
-        
-    }//main
+         */
+    }
 
     private static void LegolcsobbFuvarForintba(int TOHUF) {
         int akt = 0;
@@ -47,7 +58,7 @@ public class FajlBeolvas {
                 akt = i;
             }
         }
-        System.out.println("3. Legolcsóbb fuvar forintba: "+ (int)fuvarok.get(akt).getOsszeg() * TOHUF+" FT");
+        System.out.println("3. Legolcsóbb fuvar forintba: " + (int) fuvarok.get(akt).getOsszeg() * TOHUF + " FT");
     }
 
     private static void LegdragabbFuvarRendszama() {
@@ -57,7 +68,7 @@ public class FajlBeolvas {
                 akt = i;
             }
         }
-        
+
         System.out.println("2. Legdrágább fuvar rendszáma: " + fuvarok.get(akt).getRendszam());
     }
 
