@@ -54,7 +54,6 @@ public class FajlBeolvas {
         /* 7.feladat */
         HanyfeleFizetesiModVan();
 
-
         /* 8.feladat */
         MelyikAutoMennyiFuvartTeljesitett();
         MelyikAutoMennyiFuvartTeljesitettKiir();
