@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class FajlBeolvas {
 
     /*
-        System.out.println("6. Hány darab autó van a rendszerben: ");
-        System.out.println("7. Hányféle fizetési mód van: ");
         System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
      */
     static List<Fuvar> fuvarok = new ArrayList<>();
+    static Set<String> autokHalmaz = new HashSet<>();
+    static Set<String> fizetesHalmaz = new HashSet<>();
 
     public static void main(String[] args) throws IOException {
         final int TOHUF = 354; //2026.05.08
@@ -46,7 +48,30 @@ public class FajlBeolvas {
         /* 5.feladat */
         MindenFizetesiModMeghatarozott();
 
+        /* 6.feladat */
+        HanyDarabAutoVanARendszerben();
+
+        HanyfeleFizetesiModVan();
+
     }//main
+
+    private static void HanyfeleFizetesiModVan() {
+        for (Fuvar f : fuvarok) {
+            if (!f.getFizetesiMod().equals("-")) {
+                fizetesHalmaz.add(f.getFizetesiMod());
+            }
+        }
+        int fizetesekSzama = fizetesHalmaz.size();
+        System.out.println("7. Hányféle fizetési mód van: " + fizetesekSzama);
+    }
+
+    private static void HanyDarabAutoVanARendszerben() {
+        for (Fuvar f : fuvarok) {
+            autokHalmaz.add(f.getRendszam());
+        }
+        int autokSzama = autokHalmaz.size();
+        System.out.println("6. Hány darab autó van a rendszerben: " + autokSzama);
+    }
 
     private static void MindenFizetesiModMeghatarozott() {
         final int N = fuvarok.size();
@@ -65,7 +90,7 @@ public class FajlBeolvas {
             return true;
         }
     }
-    
+
     private static void HanyKartyasFizetesVolt() {
         int db = 0;
         for (int i = 0; i < fuvarok.size(); i++) {
@@ -104,6 +129,5 @@ public class FajlBeolvas {
         }
         System.out.println("1. Összes fuvar értéke: " + osszeg);
     }
-
 
 }//class
