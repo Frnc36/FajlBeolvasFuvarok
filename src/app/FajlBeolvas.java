@@ -8,14 +8,18 @@ import java.util.List;
 
 public class FajlBeolvas {
 
+    /*
+        System.out.println("6. Hány darab autó van a rendszerben: ");
+        System.out.println("7. Hányféle fizetési mód van: ");
+        System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
+     */
     static List<Fuvar> fuvarok = new ArrayList<>();
-    static final int TOHUF = 354; //2026.05.08
 
     public static void main(String[] args) throws IOException {
+        final int TOHUF = 354; //2026.05.08
+
         Path path = Path.of("fuvarok.csv");
-
         List<String> sorok = Files.readAllLines(path);
-
         for (String sor : sorok) {
             //System.out.println("sor: " + sor);
             String s[] = sor.split(";");
@@ -26,13 +30,42 @@ public class FajlBeolvas {
             Fuvar fuvar = new Fuvar(rendszam, idoMp, osszeg, fizetesiMod);
             fuvarok.add(fuvar);
         }
+
+        /* 1.feladat */
         OsszesFuvarOsszeg();
+
+        /* 2.feladat */
         LegdragabbFuvarRendszama();
+
+        /* 3.feladat */
         LegolcsobbFuvarForintba(TOHUF);
+
+        /* 4.feladat */
         HanyKartyasFizetesVolt();
+
+        /* 5.feladat */
+        MindenFizetesiModMeghatarozott();
 
     }//main
 
+    private static void MindenFizetesiModMeghatarozott() {
+        final int N = fuvarok.size();
+        int i = 0;
+        while (i < N && FizetesMod(fuvarok.get(i).getFizetesiMod())) {
+            i++;
+        }
+        String valasz = i >= N ? "igen" : "nem";
+        System.out.println("5. Minden fizetési mód meghatározott: " + valasz);
+    }
+
+    private static boolean FizetesMod(String fizetesiMod) {
+        if (fizetesiMod.equals("-")) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     private static void HanyKartyasFizetesVolt() {
         int db = 0;
         for (int i = 0; i < fuvarok.size(); i++) {
@@ -41,14 +74,6 @@ public class FajlBeolvas {
             }
         }
         System.out.println("4. Hány kártyás fizetés volt: " + db + " darab");
-
-        /*
-        System.out.println("4. Hány kártyás fizetés volt: ");
-        System.out.println("5. Minden fizetési mód meghatározott: ");
-        System.out.println("6. Hány darab autó van a rendszerben: ");
-        System.out.println("7. Hányféle fizetési mód van: ");
-        System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
-         */
     }
 
     private static void LegolcsobbFuvarForintba(int TOHUF) {
@@ -77,7 +102,8 @@ public class FajlBeolvas {
         for (int i = 0; i < fuvarok.size(); i++) {
             osszeg += fuvarok.get(i).getOsszeg();
         }
-        System.out.println("1. Összed fuvar értéke: " + osszeg);
+        System.out.println("1. Összes fuvar értéke: " + osszeg);
     }
+
 
 }//class
