@@ -4,18 +4,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class FajlBeolvas {
 
-    /*
-        System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
-     */
     static List<Fuvar> fuvarok = new ArrayList<>();
     static Set<String> autokHalmaz = new HashSet<>();
     static Set<String> fizetesHalmaz = new HashSet<>();
+    static Map<String, Integer> fuvarokSzama = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
         final int TOHUF = 354; //2026.05.08
@@ -51,9 +51,36 @@ public class FajlBeolvas {
         /* 6.feladat */
         HanyDarabAutoVanARendszerben();
 
+        /* 7.feladat */
         HanyfeleFizetesiModVan();
 
+
+        /* 8.feladat */
+        MelyikAutoMennyiFuvartTeljesitett();
+        MelyikAutoMennyiFuvartTeljesitettKiir();
+
     }//main
+
+    private static void MelyikAutoMennyiFuvartTeljesitettKiir() {
+        for (Map.Entry<String, Integer> bejegyzes : fuvarokSzama.entrySet()) {
+            String auto = bejegyzes.getKey();
+            int darab = bejegyzes.getValue();
+            System.out.println("- " + auto + " -> " + darab + " fuvar");
+        }
+    }
+
+    private static void MelyikAutoMennyiFuvartTeljesitett() {
+        System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
+        for (Fuvar fuvar : fuvarok) {
+            String autoRendszam = fuvar.getRendszam();
+            if (fuvarokSzama.containsKey(autoRendszam)) {
+                int eddigi = fuvarokSzama.get(autoRendszam);
+                fuvarokSzama.put(autoRendszam, eddigi + 1);
+            } else {
+                fuvarokSzama.put(autoRendszam, 1);
+            }
+        }
+    }
 
     private static void HanyfeleFizetesiModVan() {
         for (Fuvar f : fuvarok) {
