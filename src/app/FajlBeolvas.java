@@ -15,7 +15,7 @@ public class FajlBeolvas {
     static List<Fuvar> fuvarok = new ArrayList<>();
     static Set<String> autokHalmaz = new HashSet<>();
     static Set<String> fizetesHalmaz = new HashSet<>();
-    static Map<String, Integer> fuvarokSzama = new HashMap<>();
+    static Map<String, Integer> fuvarokSzama = new HashMap<>(); //A HashMap egy olyan adatszerkezet, amely kulcs-érték párokat tárol. Minden elemhez tartozik egy kulcs (egyedi azonosító) és egy érték (az adat).
 
     public static void main(String[] args) throws IOException {
         final int TOHUF = 354; //2026.05.08
@@ -61,9 +61,9 @@ public class FajlBeolvas {
     }//main
 
     private static void MelyikAutoMennyiFuvartTeljesitettKiir() {
-        for (Map.Entry<String, Integer> bejegyzes : fuvarokSzama.entrySet()) {
-            String auto = bejegyzes.getKey();
-            int darab = bejegyzes.getValue();
+        for (Map.Entry<String, Integer> bejegyzes : fuvarokSzama.entrySet()) { // Lekéri a Map összes kulcs-érték párját egy Set-ben
+            String auto = bejegyzes.getKey(); //Kiveszi az aktuális bejegyzésből a kulcsot (az autó rendszámát), és eltárolja egy String változóban.
+            int darab = bejegyzes.getValue(); //Kiveszi az aktuális bejegyzésből az értéket (hány fuvarja van az autónak), és eltárolja egy int változóban.
             System.out.println("- " + auto + " -> " + darab + " fuvar");
         }
     }
@@ -72,11 +72,11 @@ public class FajlBeolvas {
         System.out.println("8. Melyik autó mennyi fuvart teljesített: ");
         for (Fuvar fuvar : fuvarok) {
             String autoRendszam = fuvar.getRendszam();
-            if (fuvarokSzama.containsKey(autoRendszam)) {
-                int eddigi = fuvarokSzama.get(autoRendszam);
-                fuvarokSzama.put(autoRendszam, eddigi + 1);
+            if (fuvarokSzama.containsKey(autoRendszam)) { //Megvizsgálja, hogy ez az autó (autoRendszam) szerepel-e már a fuvarokSzama térképben.
+                int fuvarSzam = fuvarokSzama.get(autoRendszam);
+                fuvarokSzama.put(autoRendszam, fuvarSzam + 1); //Frissíti a térképet: az autó fuvarjainak számát megnöveli 1-gyel (mert most találtunk egy újabb fuvarhoz).
             } else {
-                fuvarokSzama.put(autoRendszam, 1);
+                fuvarokSzama.put(autoRendszam, 1); //Csak akkor fut le, ha az autó még nem szerepel a térképben. Ez az autó első fuvarja → beírjuk a térképbe, hogy 1 fuvarja van.
             }
         }
     }
@@ -144,7 +144,6 @@ public class FajlBeolvas {
                 akt = i;
             }
         }
-
         System.out.println("2. Legdrágább fuvar rendszáma: " + fuvarok.get(akt).getRendszam());
     }
 
