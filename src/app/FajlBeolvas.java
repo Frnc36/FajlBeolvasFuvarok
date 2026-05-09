@@ -88,7 +88,7 @@ public class FajlBeolvas {
             }
         }
         int fizetesekSzama = fizetesHalmaz.size();
-        System.out.println("7. Hányféle fizetési mód van: " + fizetesekSzama);
+        System.out.println("7. Hányféle fizetési mód van: " + fizetesekSzama +" féle");
     }
 
     private static void HanyDarabAutoVanARendszerben() {
@@ -96,7 +96,7 @@ public class FajlBeolvas {
             autokHalmaz.add(f.getRendszam());
         }
         int autokSzama = autokHalmaz.size();
-        System.out.println("6. Hány darab autó van a rendszerben: " + autokSzama);
+        System.out.println("6. Hány darab autó van a rendszerben: " + autokSzama +" darab");
     }
 
     private static void MindenFizetesiModMeghatarozott() {
