@@ -55,10 +55,30 @@ public class FajlBeolvas {
         HanyfeleFizetesiModVan();
 
         /* 8.feladat */
-        MelyikAutoMennyiFuvartTeljesitett();
-        MelyikAutoMennyiFuvartTeljesitettKiir();
+        //MelyikAutoMennyiFuvartTeljesitett();
+        //MelyikAutoMennyiFuvartTeljesitettKiir();
+        MelyikAutoMennyiFuvartTeljesitettOrai();
 
     }//main
+
+    private static void MelyikAutoMennyiFuvartTeljesitettOrai() {
+        /* Sablón szerkezet */
+        for (Fuvar fuvar : fuvarok) {
+            String kulcs = fuvar.getRendszam();
+            if (fuvarokSzama.containsKey(kulcs)) {
+                int ertek = fuvarokSzama.get(kulcs);
+                fuvarokSzama.put(kulcs, ++ertek);
+            } else {
+                fuvarokSzama.put(kulcs, 1);
+            }
+        }
+        for (Map.Entry<String, Integer> entry : fuvarokSzama.entrySet()) {
+            String kulcs = entry.getKey();
+            Integer ertek = entry.getValue();
+            System.out.printf("[%s] = %d\n", kulcs, ertek);
+
+        }
+    }
 
     private static void MelyikAutoMennyiFuvartTeljesitettKiir() {
         for (Map.Entry<String, Integer> bejegyzes : fuvarokSzama.entrySet()) { // Lekéri a Map összes kulcs-érték párját egy Set-ben
@@ -88,7 +108,7 @@ public class FajlBeolvas {
             }
         }
         int fizetesekSzama = fizetesHalmaz.size();
-        System.out.println("7. Hányféle fizetési mód van: " + fizetesekSzama +" féle");
+        System.out.println("7. Hányféle fizetési mód van: " + fizetesekSzama + " féle");
     }
 
     private static void HanyDarabAutoVanARendszerben() {
@@ -96,7 +116,7 @@ public class FajlBeolvas {
             autokHalmaz.add(f.getRendszam());
         }
         int autokSzama = autokHalmaz.size();
-        System.out.println("6. Hány darab autó van a rendszerben: " + autokSzama +" darab");
+        System.out.println("6. Hány darab autó van a rendszerben: " + autokSzama + " darab");
     }
 
     private static void MindenFizetesiModMeghatarozott() {
